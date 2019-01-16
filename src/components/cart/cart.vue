@@ -63,7 +63,7 @@ export default {
       this.selectedProductExistsInCart
         ? this.increaseExisitingProductQuantity()
         : this.addNonExistingProductToCart();
-      alert("product has been added");
+      alert("product has been added to your cart");
     },
     productExistsInCart() {
       return this.products.some(
@@ -94,9 +94,11 @@ export default {
     },
     totalPrice() {
       if (this.isEmpty) return false;
-      return this.products
-        .map(product => parseFloat(product.price.value) * product.quantity)
-        .reduce((a, v) => a + parseFloat(v));
+      return Math.round(
+        this.products
+          .map(product => parseFloat(product.price.value) * product.quantity)
+          .reduce((a, v) => a + parseFloat(v))
+      );
     },
     selectedCartProduct() {
       return {
